@@ -1090,9 +1090,10 @@ body {
   letter-spacing: 0.02em;
 }
 
-.nav-tab-btn.active {
-  color: var(--text-main);
+.device-bottom-nav .nav-tab-btn.active {
+    color: var(--text-main);
 }
+
 
 .nav-tab-btn.active .nav-label {
   border-bottom: 2px solid var(--border-strong);
