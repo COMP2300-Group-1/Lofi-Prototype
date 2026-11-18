@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMP2300 Lo-Fi Prototype | Student Financial Resilience Navigator</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Prototype Presentation Header & Viewport Scaler Toolbar -->
+  <header class="prototype-meta-header">
+    <span class="badge" id="meta-badge">COMP2300 • Deliverable 2: Concept 1 "Runway" Hybrid</span>
+    <h1 id="meta-title">Student &amp; Fresh Graduate Financial Resilience Navigator</h1>
+    <p id="meta-subtitle">
+      Low-Fidelity Interactive Prototype implementing <strong>Deliverable 2.md</strong> &amp; <strong>Wireframe.drawio</strong> | Client: Pauline Yong (FPAM)
+    </p>
+    
+    <!-- Top Controls: Viewport Scale Mode + Bilingual Language Switcher -->
+    <div class="top-controls-bar">
+      <!-- Viewport Scale Mode Switcher -->
+      <div class="view-mode-toolbar" role="toolbar" aria-label="Viewport Scale Mode Switcher">
+        <span class="view-mode-label" id="lbl-view-mode">View Mode:</span>
+        <button class="view-mode-btn" id="btn-mode-mobile" aria-pressed="false">
+          <span>📱</span>
+          <span id="btn-text-mobile">Mobile Simulator (390px)</span>
+        </button>
+        <button class="view-mode-btn active" id="btn-mode-desktop" aria-pressed="true">
+          <span>💻</span>
+          <span id="btn-text-desktop">Desktop Dashboard (Fluid)</span>
+        </button>
+      </div>
+
+      <!-- Bilingual Language Toggle Button (EN / BM) -->
+      <button class="lang-toggle-btn" id="btn-lang-toggle" title="Toggle English / Bahasa Melayu">
+        <span>🌐</span>
+        <span id="lbl-lang-name">Language:</span>
+        <span class="lang-badge" id="lbl-lang-code">EN</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Application Container (Adapts between Desktop Dashboard & Mobile Simulator) -->
+  <div class="device-container desktop-view" role="region" aria-label="Interactive Prototype Application">
+    
+    <!-- ===================================================================
+         DESKTOP APP TOP BAR (Visible in Desktop Mode)
+         =================================================================== -->
+    <div class="desktop-top-bar" aria-label="Desktop System Header">
+      <div class="desktop-app-brand">
+        <span style="font-size: 20px;">🛡️</span>
+        <div>
+          <div class="desktop-app-brand-title" id="d-app-title">Runway: Financial Resilience Navigator</div>
+          <div style="font-size: 10px; color: var(--text-muted); font-family: var(--font-mono);" id="d-app-sub">
+            EduCity Campus • Concept 1 "Runway" with What-If Lab &amp; Circle
+          </div>
+        </div>
+      </div>
+
+      <div class="desktop-top-right">
+        <span id="desktop-current-time">Wednesday, 09:41 AM</span>
+        <div class="desktop-user-pill">
+          <span>🎓</span>
+          <span id="d-user-pill-text">Student Account (PTPTN Holder)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         MOBILE PHONE TOP NOTCH (Visible in Mobile Mode)
+         =================================================================== -->
+    <div class="device-notch-bar" aria-hidden="true">
+      <span id="mobile-current-time">09:41</span>
+      <div class="notch-pill"></div>
+      <span>📶 100% 🔋</span>
+    </div>
+
+    <!-- MOBILE SCREEN TITLE HEADER (Visible in Mobile Mode) -->
+    <div class="screen-header-bar">
+      <h2 id="mobile-header-screen-title">Runway Fuel Gauge</h2>
+      <span class="client-tag">LO-FI D2</span>
+    </div>
+
+    <!-- ===================================================================
+         APP BODY LAYOUT (Sidebar + Main Viewport)
+         =================================================================== -->
+    <div class="app-body-layout">
+      
+      <!-- DESKTOP SIDEBAR NAVIGATION (Visible in Desktop Mode) -->
+      <aside class="desktop-sidebar" role="navigation" aria-label="Desktop Primary Navigation">
+        <div>
+          <div class="sidebar-section-title" id="sb-nav-title">Navigation Modules</div>
+          <div class="desktop-sidebar-nav">
+            <button class="desktop-nav-btn nav-tab-btn active" role="tab" aria-selected="true" data-target="screen-gauge">
+              <span class="nav-icon">📊</span>
+              <span id="nav-lbl-gauge">Runway Gauge</span>
+            </button>
+            <button class="desktop-nav-btn nav-tab-btn" role="tab" aria-selected="false" data-target="screen-tracker">
+              <span class="nav-icon">📝</span>
+              <span id="nav-lbl-tracker">Quick-Add Tracker</span>
+            </button>
+            <button class="desktop-nav-btn nav-tab-btn" role="tab" aria-selected="false" data-target="screen-bnpl">
+              <span class="nav-icon">🧮</span>
+              <span id="nav-lbl-bnpl">What-If Lab &amp; BNPL</span>
+            </button>
+            <button class="desktop-nav-btn nav-tab-btn" role="tab" aria-selected="false" data-target="screen-events">
+              <span class="nav-icon">🎉</span>
+              <span id="nav-lbl-events">Circle &amp; Graceful Out</span>
+            </button>
+            <button class="desktop-nav-btn nav-tab-btn" role="tab" aria-selected="false" data-target="screen-widgets">
+              <span class="nav-icon">📱</span>
+              <span id="nav-lbl-widgets">Ambient Widgets</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="desktop-sidebar-footer">
+          <div class="sidebar-footer-title" id="sb-footer-title">⚡ Safe-to-Spend Today</div>
+          <div style="font-size: 15px; font-weight: 800; margin-bottom: 2px;" id="sb-safe-val">RM 25.00 / day</div>
+          <div style="font-size: 10px; color: var(--text-muted);" id="sb-footer-sub">Runway: 18 Days Normal Life Remaining</div>
+        </div>
+      </aside>
+
+      <!-- MAIN SCROLLABLE VIEWPORT FOR SCREENS -->
+      <main class="screen-viewport">
+
+        <!-- DESKTOP SCREEN TITLE BREADCRUMB (Visible in Desktop Mode) -->
+        <div class="desktop-screen-title-banner">
+          <div>
+            <h2 id="desktop-header-title">Runway Fuel Gauge</h2>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;" id="desktop-header-desc">
+              Glance-First Daily Runway • Answers: "How many days of normal life do I have left?"
+            </div>
+          </div>
+          <div class="desktop-context-pill" id="desktop-context-pill">
+            RUNWAY: 18 DAYS (CALM BUFFER)
+          </div>
+        </div>
+
+        <!-- ===================================================================
+             SCREEN 1: CONCEPT 1 "RUNWAY" (GLANCE-FIRST FUEL GAUGE)
+             (Wireframe Group G3oWoT277URhAdlZqQuD-87 + Deliverable 2 Epic 1)
+             =================================================================== -->
+        <section id="screen-gauge" class="screen-view active" aria-label="Runway Fuel Gauge Screen">
+          
+          <div class="desktop-split-grid">
+            
+            <!-- LEFT COLUMN: RUNWAY DAYS HERO CARD & CAPACITY GAUGE -->
+            <div class="grid-col-left">
+              
+              <!-- Primary "Runway Days" Metric Box (Deliverable 2 US-01) -->
+              <div class="runway-primary-box">
+                <div class="stat-label" id="lbl-runway-hero">Daily Survival Runway</div>
+                <div class="runway-days-value" id="val-runway-days">18 DAYS</div>
+                <div class="runway-days-sub" id="sub-runway-days">Of Normal Living Costs Remaining</div>
+                <div style="font-size: 13px; font-weight: 800; margin-top: 6px; color: var(--calm-safe);" id="val-safe-today">
+                  Safe-to-Spend Today: RM 25.00
+                </div>
+              </div>
+
+              <!-- Semicircular Capacity Gauge (Calm Visual Cue) -->
+              <div class="wf-card">
+                <div class="wf-card-title">
+                  <span id="title-capacity-gauge">Spending Capacity Gauge</span>
+                  <span style="font-size: 10px; font-weight: normal; color: var(--text-subtle);">Calm Dial Mode</span>
+                </div>
+
+                <div class="gauge-visual-container">
+                  <svg class="gauge-svg" viewBox="0 0 200 110">
+                    <!-- Dial Track Background -->
+                    <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#e0e0e0" stroke-width="18" stroke-linecap="round" />
+                    <!-- Dial Fill (Calm Green to Soft Blue) -->
+                    <path id="gauge-fill-path" d="M 20 100 A 80 80 0 0 1 148 43" fill="none" stroke="#222222" stroke-width="18" stroke-linecap="round" />
+                    <!-- Center Pivot -->
+                    <circle cx="100" cy="100" r="8" fill="#111111" />
+                    <!-- Pointer Needle -->
+                    <line id="gauge-needle" x1="100" y1="100" x2="135" y2="48" stroke="#111111" stroke-width="3" stroke-linecap="round" />
+                  </svg>
+                  <div class="gauge-caption" id="gauge-status-text">Safe Spending Buffer: 37.5% (Non-Punitive)</div>
+                </div>
+              </div>
+
+              <!-- Stat Row: Money Left vs Money Spent -->
+              <div class="stat-row-dual">
+                <div class="stat-box">
+                  <div class="stat-label" id="lbl-money-left">Money Left</div>
+                  <div class="stat-value" id="gauge-money-left">RM 450.00</div>
+                  <div class="stat-sub" id="sub-money-left">Buffer until 30 Nov</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label" id="lbl-money-spent">Money Spent</div>
+                  <div class="stat-value" id="gauge-money-spent">RM 750.00</div>
+                  <div class="stat-sub" id="sub-money-spent">Semester month burn</div>
+                </div>
+              </div>
+
+              <!-- Spending Goal Card -->
+              <div class="wf-card wf-card-subtle">
+                <div class="wf-card-title">
+                  <span id="title-spending-goal">Monthly Spending Goal</span>
+                  <span style="font-size: 10px; font-weight: normal;">Target &lt; RM 1,200</span>
+                </div>
+                <div class="cat-progress-track" style="height: 12px; margin-bottom: 6px;">
+                  <div class="cat-progress-fill" style="width: 62.5%;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted);">
+                  <span id="lbl-goal-spent">Spent: RM 750.00</span>
+                  <span id="lbl-goal-cap">Target Cap: RM 1,200.00</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: GENTLE REMINDERS & CATEGORY BREAKDOWN -->
+            <div class="grid-col-right">
+              
+              <!-- Non-Judgmental Reminder Banner (Deliverable 2 US-06) -->
+              <div class="reminder-banner" id="gauge-reminder-pill" role="button" tabindex="0" title="Click to view reminder details">
+                <span style="font-size: 18px;">💡</span>
+                <div>
+                  <strong id="banner-reminder-title">Gentle Auto-Debit Reminder:</strong>
+                  <div style="font-size: 11px; color: var(--text-muted); font-weight: normal;" id="banner-reminder-desc">
+                    SPayLater installment (RM 65.00) scheduled in 3 days. Your safe runway already reserves this fund.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Spending Categories Breakdown -->
+              <div class="wf-card">
+                <div class="wf-card-title" id="title-cat-breakdown">Spending Categories Breakdown</div>
+                
+                <div class="cat-progress-item">
+                  <div class="cat-progress-label-row">
+                    <span id="cat-lbl-food">Food &amp; Dining (Daily subsistence)</span>
+                    <span id="cat-food-val">RM 420.00 (56%)</span>
+                  </div>
+                  <div class="cat-progress-track">
+                    <div class="cat-progress-fill" style="width: 56%;"></div>
+                  </div>
+                </div>
+
+                <div class="cat-progress-item">
+                  <div class="cat-progress-label-row">
+                    <span id="cat-lbl-trans">Transport &amp; Petrol (Campus shuttle/Grab)</span>
+                    <span id="cat-trans-val">RM 180.00 (24%)</span>
+                  </div>
+                  <div class="cat-progress-track">
+                    <div class="cat-progress-fill fill-mid" style="width: 24%;"></div>
+                  </div>
+                </div>
+
+                <div class="cat-progress-item">
+                  <div class="cat-progress-label-row">
+                    <span id="cat-lbl-acad">Academic &amp; Printing (Coursework supplies)</span>
+                    <span id="cat-acad-val">RM 150.00 (20%)</span>
+                  </div>
+                  <div class="cat-progress-track">
+                    <div class="cat-progress-fill fill-light" style="width: 20%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Log CTA Button -->
+              <div class="wf-card wf-card-dashed" style="text-align: center;">
+                <div style="font-weight: 800; font-size: 13px; margin-bottom: 4px;" id="cta-quickadd-title">
+                  ⚡ Need to Log a Purchase?
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;" id="cta-quickadd-sub">
+                  Use the rapid numeric keypad. No compulsory categorization required (< 5 seconds).
+                </div>
+                <button class="btn-wf btn-wf-primary" id="btn-open-keypad" style="max-width: 260px; margin: 0 auto;">
+                  ⌨️ Open Numeric Keypad
+                </button>
+              </div>
+
+              <!-- Empathetic Design Rationale (Deliverable 2 Section 1) -->
+              <div class="wf-card">
+                <div class="wf-card-title" id="title-empathy-box">Design Thinking: Avoiding Money Shame</div>
+                <div style="font-size: 11px; color: var(--text-muted); line-height: 1.5;" id="desc-empathy-box">
+                  Traditional apps trigger avoidance loops through harsh red alerts and tabular spreadsheets. Concept 1 ("Runway") replaces punitive scolding with calm visual fuel gauges that preserve user engagement even when finances run tight.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             SCREEN 2: MONEY TRACKER & GIG-INCOME SMOOTHING
+             (Wireframe Group G3oWoT277URhAdlZqQuD-86 + Deliverable 2 US-04, US-05)
+             =================================================================== -->
+        <section id="screen-tracker" class="screen-view" aria-label="Money Tracker Screen">
+          
+          <div class="desktop-split-grid">
+            
+            <!-- LEFT COLUMN: STATS & AUDIT LOG -->
+            <div class="grid-col-left">
+              
+              <!-- Top Summary Cards -->
+              <div class="stat-row-dual">
+                <div class="stat-box">
+                  <div class="stat-label">Money Left</div>
+                  <div class="stat-value" id="tracker-money-left">RM 450.00</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Money Spent</div>
+                  <div class="stat-value" id="tracker-money-spent">RM 750.00</div>
+                </div>
+              </div>
+
+              <!-- Calculations Breakdown Audit Trail -->
+              <div class="wf-card wf-card-subtle">
+                <div class="wf-card-title" id="title-calc-audit">Calculations &amp; Audit Trail</div>
+                <div class="wf-item-row">
+                  <span id="lbl-calc-base">Base Income / Allowance:</span>
+                  <span style="font-weight: 700;" id="calc-base-val">RM 1,200.00</span>
+                </div>
+                <div class="wf-item-row">
+                  <span id="lbl-calc-exp">Current Logged Expenditures:</span>
+                  <span style="font-weight: 700;" id="calc-logged-exp">- RM 750.00</span>
+                </div>
+                <div class="wf-item-row">
+                  <span id="lbl-calc-bnpl">Reserved BNPL Commitments:</span>
+                  <span style="font-weight: 700;">- RM 170.00</span>
+                </div>
+                <div class="wf-item-row" style="border-top: 1.5px dashed var(--border-strong); padding-top: 10px;">
+                  <span style="font-weight: 800;" id="lbl-calc-net">Calculated Safe Buffer:</span>
+                  <span style="font-weight: 800; font-size: 15px;" id="calc-net-buffer">RM 280.00</span>
+                </div>
+              </div>
+
+              <!-- 4-Week Gig-Income Smoothing Module (Deliverable 2 US-05) -->
+              <div class="wf-card">
+                <div class="wf-card-title">
+                  <span id="title-gig-smoothing">Gig-Income Smoothing</span>
+                  <span class="client-tag" id="tag-gig-mode">ROLLING AVG</span>
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;" id="desc-gig-smoothing">
+                  For freelancers &amp; gig workers (Grab, Lalamove, part-time tutoring) with variable weekly earnings.
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span style="font-size: 11px; font-weight: 700;" id="lbl-gig-toggle">Enable 4-Week Rolling Smoothing:</span>
+                  <input type="checkbox" id="chk-gig-smoothing" checked style="width: 18px; height: 18px; cursor: pointer;">
+                </div>
+
+                <div class="impact-alert-box" style="margin-top: 6px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 10px;">
+                    <span>Week 1: RM 350</span>
+                    <span>Week 2: RM 280</span>
+                    <span>Week 3: RM 420</span>
+                    <span>Week 4: RM 270</span>
+                  </div>
+                  <div style="font-weight: 800; font-size: 12px; margin-top: 4px;" id="val-smoothed-income">
+                    4-Week Smoothed Baseline: RM 1,320.00 / month
+                  </div>
+                  <div style="font-size: 10px; color: var(--calm-safe); margin-top: 2px;" id="desc-smoothed-stat">
+                    ✅ Stabilized: Irregular paychecks will not artificially distort daily runway.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Transaction Audit List -->
+              <div class="wf-card">
+                <div class="wf-card-title" id="title-recent-entries">Recent Logged Entries</div>
+                <div id="tracker-recent-list">
+                  <div class="wf-item-row">
+                    <div>
+                      <div class="item-title">🍽️ Food: Cafeteria Meals</div>
+                      <div class="item-desc">Logged today • EduCity Dining Hall</div>
+                    </div>
+                    <span style="font-weight: 700;">RM 25.00</span>
+                  </div>
+                  <div class="wf-item-row">
+                    <div>
+                      <div class="item-title">🚗 Transport: Campus Grab</div>
+                      <div class="item-desc">Logged yesterday • Iskandar Puteri</div>
+                    </div>
+                    <span style="font-weight: 700;">RM 18.00</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: STACKED PROGRESS & QUICK ENTRY FORM -->
+            <div class="grid-col-right">
+              
+              <!-- Spending Categories Stacked Bar -->
+              <div class="wf-card">
+                <div class="wf-card-title">Spending Categories (Progress Bar Style)</div>
+                <div class="stacked-progress-bar">
+                  <div class="stacked-segment seg-1" style="width: 56%;" title="Food 56%"></div>
+                  <div class="stacked-segment seg-2" style="width: 24%;" title="Transport 24%"></div>
+                  <div class="stacked-segment seg-3" style="width: 20%;" title="Academic 20%"></div>
+                </div>
+                <div style="font-size: 10px; color: var(--text-muted); display: flex; justify-content: space-between;">
+                  <span>■ Food: RM 420</span>
+                  <span>■ Transport: RM 180</span>
+                  <span>■ Academic: RM 150</span>
+                </div>
+              </div>
+
+              <!-- Standard Expense Entry Form (Inline Fallback) -->
+              <div class="wf-card">
+                <div class="wf-card-title" id="title-cat-selector">Categories Selection &amp; Log Entry</div>
+                
+                <div class="chip-group" id="tracker-cat-chips">
+                  <button class="chip-btn active" data-cat="Food">🍽️ Food</button>
+                  <button class="chip-btn" data-cat="Transport">🚗 Transport</button>
+                  <button class="chip-btn" data-cat="Academic">📚 Academic</button>
+                  <button class="chip-btn" data-cat="Utilities">💡 Utilities</button>
+                  <button class="chip-btn" data-cat="Social">☕ Social</button>
+                </div>
+
+                <div class="wf-form-group">
+                  <label class="wf-form-label" for="tracker-input-amount" id="lbl-input-amt">Expense Amount (RM):</label>
+                  <input class="wf-input" type="number" id="tracker-input-amount" value="25.00" step="5" min="1">
+                </div>
+
+                <div class="wf-form-group">
+                  <label class="wf-form-label" for="tracker-input-note" id="lbl-input-desc">Transaction Description (Optional):</label>
+                  <input class="wf-input" type="text" id="tracker-input-note" value="Cafeteria Lunch &amp; Drink">
+                </div>
+
+                <!-- Add Button and Clear Button -->
+                <div class="btn-row">
+                  <button class="btn-wf btn-wf-primary" id="btn-tracker-add">+ Add Button</button>
+                  <button class="btn-wf btn-wf-secondary" id="btn-tracker-clear">Clear Button</button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             SCREEN 3: CONCEPT 2 "WHAT-IF LAB" & BNPL COLLISION CHECKER
+             (Wireframe Group G3oWoT277URhAdlZqQuD-85 + Deliverable 2 Section 2)
+             =================================================================== -->
+        <section id="screen-bnpl" class="screen-view" aria-label="What-If Lab Screen">
+          
+          <div class="desktop-split-grid">
+            
+            <!-- LEFT COLUMN: ALLOWANCES, STATUTORY DEDUCTIONS & BNPL COLLISION -->
+            <div class="grid-col-left">
+              
+              <!-- Allowance Before & After Deductions -->
+              <div class="stat-row-dual">
+                <div class="stat-box">
+                  <div class="stat-label">Monthly Allowance</div>
+                  <div class="stat-value">RM 1,500</div>
+                  <div class="stat-sub">Before Deductions</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Net Safe Allowance</div>
+                  <div class="stat-value" id="bnpl-net-allowance">RM 530.00</div>
+                  <div class="stat-sub">After all commitments</div>
+                </div>
+              </div>
+
+              <!-- Basic Necessities Deduction Card -->
+              <div class="wf-card">
+                <div class="wf-card-title">
+                  <span id="title-necessities">Basic Necessities Deduction</span>
+                  <span style="font-weight: 700; color: var(--text-main);">- RM 800.00</span>
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted); line-height: 1.4;" id="desc-necessities">
+                  Non-negotiable living baseline: EduCity rent (RM 550), basic grocery staples (RM 200), and mobile telco data (RM 50).
+                </div>
+              </div>
+
+              <!-- BNPL Collision Checker & Active Micro-Debts (Deliverable 2 US-03) -->
+              <div class="wf-card">
+                <div class="wf-card-title">
+                  <span id="title-bnpl-collision">BNPL Collision &amp; Installments</span>
+                  <span class="client-tag">COLLISION CHECK</span>
+                </div>
+                
+                <div class="wf-item-row">
+                  <div class="item-left">
+                    <span class="item-title">SPayLater (Laptop Repair)</span>
+                    <span class="item-desc">Month 3 of 6 • Due 24 Nov</span>
+                  </div>
+                  <span style="font-weight: 700;">RM 120.00/mo</span>
+                </div>
+
+                <div class="wf-item-row">
+                  <div class="item-left">
+                    <span class="item-title">Atome (Study Shoes)</span>
+                    <span class="item-desc">Month 2 of 3 • Due 28 Nov</span>
+                  </div>
+                  <span style="font-weight: 700;">RM 50.00/mo</span>
+                </div>
+
+                <!-- Collision Warning Box -->
+                <div class="impact-alert-box" style="margin-top: 8px;">
+                  <div style="font-weight: 800; font-size: 11px;" id="title-collision-warn">
+                    ⚠️ Timeline Collision Alert:
+                  </div>
+                  <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;" id="desc-collision-warn">
+                    SPayLater (RM 120) and Atome (RM 50) auto-debit within 4 days of each other. Failure incurs RM 10 late administrative fee.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: "MAMAK NIGHT" SIMULATOR & GRADUATE SALARY SIMULATOR -->
+            <div class="grid-col-right">
+              
+              <!-- "Mamak Night" Decision Simulator (Deliverable 2 Concept 2 Idea 1) -->
+              <div class="wf-card" style="border-width: 2px;">
+                <div class="wf-card-title">
+                  <span id="title-mamak-sim">☕ "Mamak Night" Decision Simulator</span>
+                  <span class="client-tag">CONCEPT 2</span>
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;" id="desc-mamak-sim">
+                  Slide between a light drink vs full supper to see the real-time impact on your weekly survival runway.
+                </div>
+
+                <!-- Mamak Outing Cost Slider -->
+                <input type="range" min="3" max="25" value="3" class="wf-slider" id="slider-mamak-cost">
+                <div class="slider-ticks">
+                  <span>Teh Tarik (RM 3)</span>
+                  <span>Roti Canai (RM 8)</span>
+                  <span>Mee Goreng (RM 14)</span>
+                  <span>Full Supper (RM 25)</span>
+                </div>
+
+                <div class="impact-alert-box" style="margin-top: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 700;" id="lbl-mamak-selected">Selected Choice: Teh Tarik Only</span>
+                    <span style="font-weight: 900; font-size: 14px;" id="val-mamak-cost">RM 3.00</span>
+                  </div>
+                  <div style="font-size: 11px; color: var(--calm-safe); margin-top: 4px; font-weight: 700;" id="val-mamak-impact">
+                    ✅ Runway Impact: Preserves +1.2 Days of Runway vs ordering a full supper!
+                  </div>
+                </div>
+              </div>
+
+              <!-- Graduate Salary Reality Simulator (Deliverable 2 US-08) -->
+              <div class="wf-card wf-card-dashed">
+                <div class="wf-card-title">
+                  <span id="title-salary-sim">🎓 Graduate Salary Reality Simulator</span>
+                  <span class="client-tag">EPF / SOCSO / PCB</span>
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;" id="desc-salary-sim">
+                  Malaysian statutory contribution breakdown (EPF 11%, SOCSO 0.5%, EIS 0.2%, PTPTN) against Belanjawanku benchmarks.
+                </div>
+
+                <div class="wf-form-group">
+                  <label class="wf-form-label" for="sim-gross-salary" id="lbl-gross-salary">Gross Monthly Job Offer (RM):</label>
+                  <input class="wf-input" type="number" id="sim-gross-salary" value="3000.00" step="100">
+                </div>
+
+                <div class="impact-alert-box" style="margin-top: 6px;">
+                  <div class="wf-item-row" style="padding: 2px 0;">
+                    <span>EPF Employee (11%):</span>
+                    <span style="font-weight: 700;" id="sim-epf-val">- RM 330.00</span>
+                  </div>
+                  <div class="wf-item-row" style="padding: 2px 0;">
+                    <span>SOCSO (0.5%) + EIS (0.2%):</span>
+                    <span style="font-weight: 700;" id="sim-socso-val">- RM 21.00</span>
+                  </div>
+                  <div class="wf-item-row" style="padding: 2px 0;">
+                    <span>PTPTN Loan Repayment:</span>
+                    <span style="font-weight: 700;">- RM 150.00</span>
+                  </div>
+                  <div class="wf-item-row" style="border-top: 1px dashed var(--border-strong); padding-top: 4px; margin-top: 4px;">
+                    <span style="font-weight: 800;">Real Take-Home Pay:</span>
+                    <span style="font-weight: 900; font-size: 13px;" id="sim-takehome-val">RM 2,499.00</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             SCREEN 4: CONCEPT 3 "CIRCLE" & "GRACEFUL OUT" TOOLKIT
+             (Wireframe Group G3oWoT277URhAdlZqQuD-46 + Deliverable 2 Section 2)
+             =================================================================== -->
+        <section id="screen-events" class="screen-view" aria-label="Circle and Graceful Out Screen">
+          
+          <div class="desktop-split-grid">
+            
+            <!-- LEFT COLUMN: SOCIAL BUFFER & "GRACEFUL OUT" TOOLKIT -->
+            <div class="grid-col-left">
+              
+              <!-- Social Fund Balance -->
+              <div class="stat-row-dual">
+                <div class="stat-box">
+                  <div class="stat-label">Social Discretionary Fund</div>
+                  <div class="stat-value">RM 280.00</div>
+                  <div class="stat-sub">For leisure &amp; dining</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">Agreed Outings</div>
+                  <div class="stat-value" id="events-count">2 Confirmed</div>
+                  <div class="stat-sub">Upcoming this month</div>
+                </div>
+              </div>
+
+              <!-- "Graceful Out" Social Spending Toolkit (Deliverable 2 Section 2) -->
+              <div class="wf-card" style="border-width: 2px;">
+                <div class="wf-card-title">
+                  <span id="title-graceful-out">💬 "Graceful Out" Refusal Toolkit</span>
+                  <span class="client-tag">LOW-STIGMA</span>
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;" id="desc-graceful-out">
+                  Low-stigma pre-made prompts to decline or negotiate peer spending without social embarrassment.
+                </div>
+
+                <!-- Prompt 1 (Mamak session) -->
+                <div class="graceful-card">
+                  <div class="graceful-text" id="prompt-text-1">
+                    "I'm in for teh tarik, skipping late supper tonight!"
+                  </div>
+                  <button class="btn-copy-prompt" data-copy="prompt-text-1">📋 Copy</button>
+                </div>
+
+                <!-- Prompt 2 (Budget sprint) -->
+                <div class="graceful-card">
+                  <div class="graceful-text" id="prompt-text-2">
+                    "On a tight budget sprint this week, jom lepak for drinks only!"
+                  </div>
+                  <button class="btn-copy-prompt" data-copy="prompt-text-2">📋 Copy</button>
+                </div>
+
+                <!-- Prompt 3 (Desaru trip postponement) -->
+                <div class="graceful-card">
+                  <div class="graceful-text" id="prompt-text-3">
+                    "I'll pass on this roadtrip to keep my savings goal, count me in for the next one!"
+                  </div>
+                  <button class="btn-copy-prompt" data-copy="prompt-text-3">📋 Copy</button>
+                </div>
+              </div>
+
+              <!-- "Squad Goals" Anonymous Peer Challenge (Deliverable 2 US-09) -->
+              <div class="wf-card wf-card-subtle">
+                <div class="wf-card-title">
+                  <span id="title-squad-goals">🔥 Squad Goals: No-Boba Week</span>
+                  <span class="client-tag">ANONYMOUS STREAK</span>
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">
+                  Community habit streak with your peer circle without exposing actual balances.
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-weight: 800; font-size: 13px;">🔥 Day 4 of 7 Streak</span>
+                  <span class="item-badge badge-agreed">5 FRIENDS ACTIVE</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: PEER EVENT COST SPLITTER & IOU TRACKER -->
+            <div class="grid-col-right">
+              
+              <!-- Interactive Event Cost Splitter Card -->
+              <div class="wf-card wf-card-dashed">
+                <div class="wf-card-title">➕ Group Outing Cost Splitter</div>
+                
+                <div class="wf-form-group">
+                  <label class="wf-form-label" for="event-total-cost">Estimated Total Outing Bill (RM):</label>
+                  <input class="wf-input" type="number" id="event-total-cost" value="120.00" step="10">
+                </div>
+
+                <div class="wf-form-group">
+                  <label class="wf-form-label" for="event-pax-count">Number of Participating Friends (Pax):</label>
+                  <input class="wf-input" type="number" id="event-pax-count" value="4" min="1" max="20">
+                </div>
+
+                <div class="impact-alert-box">
+                  <div class="impact-alert-title">Affordability Pre-Check:</div>
+                  <div class="wf-item-row" style="padding: 2px 0;">
+                    <span>Your Individual Share:</span>
+                    <span style="font-weight: 800; font-size: 13px;" id="event-share-output">RM 30.00</span>
+                  </div>
+                  <div class="wf-item-row" style="padding: 2px 0;">
+                    <span>Social Buffer Remaining After Outing:</span>
+                    <span style="font-weight: 800;" id="event-buffer-after">RM 250.00</span>
+                  </div>
+                  <p style="font-size: 10px; margin-top: 4px; color: var(--calm-safe);" id="event-afford-verdict">
+                    ✅ Status: Well within your safe discretionary budget!
+                  </p>
+                </div>
+
+                <button class="btn-wf btn-wf-primary" id="btn-confirm-event" style="margin-top: 10px;">
+                  Commit to Outing (Add to Agreed)
+                </button>
+              </div>
+
+              <!-- Confirmed Outings List -->
+              <div class="wf-card">
+                <div class="wf-card-title">Confirmed Outings Registry</div>
+                
+                <div class="wf-item-row" style="align-items: flex-start; padding: 10px 0;">
+                  <div class="item-left">
+                    <span class="item-title">Steamboat Dinner @ Sutera Mall</span>
+                    <span class="item-desc">📅 Sat, 22 Nov • Group: Flat 4B</span>
+                    <span style="font-size: 10px; margin-top: 2px;">Total: RM 160.00 | 4 Pax</span>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="font-weight: 800; font-size: 13px;">RM 40.00</div>
+                    <span class="item-badge badge-agreed">Agreed ✓</span>
+                  </div>
+                </div>
+
+                <div class="wf-item-row" style="align-items: flex-start; padding: 10px 0;">
+                  <div class="item-left">
+                    <span class="item-title">Desaru Beach Daytrip</span>
+                    <span class="item-desc">📅 Sun, 30 Nov • Group: Badminton Circle</span>
+                    <span style="font-size: 10px; margin-top: 2px;">Est. Share: RM 85.00/pax</span>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="font-weight: 800; font-size: 13px;">RM 85.00</div>
+                    <span class="item-badge badge-pending" id="badge-desaru-status" role="button" tabindex="0">Pending ?</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             SCREEN 5: AMBIENT WIDGETS & SYSTEM TRAY
+             (Wireframe Group G3oWoT277URhAdlZqQuD-45 + Deliverable 2 US-02)
+             =================================================================== -->
+        <section id="screen-widgets" class="screen-view" aria-label="Mobile Widgets Screen">
+          
+          <div class="desktop-split-grid">
+            
+            <!-- LEFT COLUMN: WIDGET GALLERY -->
+            <div class="grid-col-left">
+              
+              <!-- 2x2 Square Mobile Homescreen Widget (Runway Days) -->
+              <div class="wf-card" style="border-radius: 16px; background: #ffffff; padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                  <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.05em; color: var(--text-muted);">
+                    HOMESCREEN 2x2 CARD WIDGET
+                  </span>
+                  <span style="font-size: 9px; font-family: var(--font-mono);">CONCEPT 1</span>
+                </div>
+
+                <div class="stat-row-dual" style="margin-bottom: 0;">
+                  <!-- Widget Sub-box 1: Runway Days -->
+                  <div class="stat-box" style="border-radius: 10px; background: #f5f5f5;">
+                    <div class="stat-label">Runway Days</div>
+                    <div class="stat-value" style="font-size: 17px;">18 Days</div>
+                    <div class="stat-sub">Safe: RM 25/day</div>
+                  </div>
+
+                  <!-- Widget Sub-box 2: Auto-Debit Reminder -->
+                  <div class="stat-box" style="border-radius: 10px; border-style: dashed; background: #fafafa;">
+                    <div class="stat-label" style="color: #111111;">Reminder</div>
+                    <div style="font-size: 12px; font-weight: 800; margin-top: 2px;">SPayLater</div>
+                    <div class="stat-sub">Due in 3d (RM 65)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lockscreen Compact Pill Widget -->
+              <div class="wf-card" style="border-radius: 25px; padding: 12px 18px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 16px;">⏱️</span>
+                  <div>
+                    <div style="font-size: 12px; font-weight: 800;">Runway: 18 Days Left (RM 25/day)</div>
+                    <div style="font-size: 9px; color: var(--text-muted);">SPayLater payment reserved</div>
+                  </div>
+                </div>
+                <span style="font-size: 12px; font-weight: 700; color: var(--text-muted);">&gt;</span>
+              </div>
+
+              <!-- System Tray / Menu Bar Glance Widget (US-02) -->
+              <div class="wf-card wf-card-subtle">
+                <div class="wf-card-title">System Tray / Menu Bar Glance (Desktop OS)</div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-size: 11px; font-weight: 700;">Tray Status: [ 🟢 18d | RM 25/d ]</div>
+                    <div style="font-size: 9px; color: var(--text-muted);">Zero taps required; morning startup visibility</div>
+                  </div>
+                  <span class="item-badge badge-agreed">TRAY ACTIVE</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: HCI RATIONALE & PRIVACY GUARANTEE -->
+            <div class="grid-col-right">
+              
+              <!-- Zero-Credential Local-First Privacy (Deliverable 2 US-07) -->
+              <div class="wf-card" style="border-width: 2px;">
+                <div class="wf-card-title">
+                  <span id="title-privacy-box">🔒 Zero-Credential Local-First Privacy</span>
+                  <span class="client-tag">US-07</span>
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted); line-height: 1.5;" id="desc-privacy-box">
+                  <p><strong>1. Instant Onboarding:</strong> Undergraduates start tracking in under 2 minutes with zero bank credential linking.</p>
+                  <p style="margin-top: 6px;"><strong>2. Local Storage Only:</strong> All ledger entries stay encrypted on the local device, removing fears of bank credential theft.</p>
+                </div>
+              </div>
+
+              <!-- HCI & Cognitive Avoidance Rationale -->
+              <div class="wf-card wf-card-dashed">
+                <div class="wf-card-title">HCI &amp; Avoidance Mitigation</div>
+                <div style="font-size: 11px; color: var(--text-muted); line-height: 1.5;">
+                  Ambient widgets surface the daily Safe-to-Spend baseline passively on waking up or unlocking the phone, bypassing the avoidance barrier that causes conventional budgeting apps to be abandoned.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+
+    <!-- ===================================================================
+         FLOATING ACTION BUTTON (+) FOR RAPID QUICK-ADD
+         =================================================================== -->
+    <button class="fab-quick-add" id="fab-quick-add" title="Quick Add Expense (< 5s)">
+      +
+    </button>
+
+    <!-- ===================================================================
+         RAPID NUMERIC KEYPAD MODAL (< 5s Logging - Deliverable 2 US-04)
+         =================================================================== -->
+    <div class="keypad-modal-overlay" id="keypad-modal" role="dialog" aria-modal="true" aria-labelledby="keypad-title">
+      <div class="keypad-modal-card">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <h3 style="font-size: 14px; font-weight: 800;" id="keypad-title">⚡ Quick-Add (< 5s)</h3>
+          <button id="btn-close-keypad" style="background: none; border: none; font-size: 18px; cursor: pointer;">✕</button>
+        </div>
+
+        <!-- Keypad Output Display -->
+        <div class="keypad-display-row">
+          <div class="keypad-display-label">
+            <span id="lbl-keypad-mode">EXPENSE AMOUNT</span>
+            <span id="keypad-selected-tag">🍽️ Food</span>
+          </div>
+          <div class="keypad-display-amount" id="keypad-amount-display">RM 0.00</div>
+        </div>
+
+        <!-- 1-Tap Optional Mood Tags -->
+        <div class="mood-tags-row" id="keypad-mood-tags">
+          <button class="mood-tag-btn active" data-tag="Food">🍽️ Food</button>
+          <button class="mood-tag-btn" data-tag="Social">☕ Social</button>
+          <button class="mood-tag-btn" data-tag="Transport">🚗 Transport</button>
+          <button class="mood-tag-btn" data-tag="Study">📚 Study</button>
+        </div>
+
+        <!-- 0-9 Keypad Grid -->
+        <div class="keypad-grid">
+          <button class="key-btn" data-key="1">1</button>
+          <button class="key-btn" data-key="2">2</button>
+          <button class="key-btn" data-key="3">3</button>
+          <button class="key-btn" data-key="4">4</button>
+          <button class="key-btn" data-key="5">5</button>
+          <button class="key-btn" data-key="6">6</button>
+          <button class="key-btn" data-key="7">7</button>
+          <button class="key-btn" data-key="8">8</button>
+          <button class="key-btn" data-key="9">9</button>
+          <button class="key-btn key-action" data-key=".">.</button>
+          <button class="key-btn" data-key="0">0</button>
+          <button class="key-btn key-action" data-key="backspace">⌫</button>
+        </div>
+
+        <button class="btn-wf btn-wf-primary" id="btn-keypad-save" style="padding: 12px;">
+          ✓ Save Entry (< 5s)
+        </button>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         MOBILE BOTTOM NAVIGATION BAR (Visible in Mobile Mode)
+         =================================================================== -->
+    <nav class="device-bottom-nav" role="tablist" aria-label="Mobile Screen Navigation">
+      <button class="nav-tab-btn active" role="tab" aria-selected="true" data-target="screen-gauge">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Runway</span>
+      </button>
+
+      <button class="nav-tab-btn" role="tab" aria-selected="false" data-target="screen-tracker">
+        <span class="nav-icon">📝</span>
+        <span class="nav-label">Tracker</span>
+      </button>
+
+      <button class="nav-tab-btn" role="tab" aria-selected="false" data-target="screen-bnpl">
+        <span class="nav-icon">🧮</span>
+        <span class="nav-label">What-If</span>
+      </button>
+
+      <button class="nav-tab-btn" role="tab" aria-selected="false" data-target="screen-events">
+        <span class="nav-icon">🎉</span>
+        <span class="nav-label">Circle</span>
+      </button>
+
+      <button class="nav-tab-btn" role="tab" aria-selected="false" data-target="screen-widgets">
+        <span class="nav-icon">📱</span>
+        <span class="nav-label">Widget</span>
+      </button>
+    </nav>
+
+    <!-- General Notification Modal -->
+    <div class="keypad-modal-overlay" id="prototype-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="keypad-modal-card">
+        <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 6px;" id="modal-title">Installment Reminder</h3>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;" id="modal-body">
+          SPayLater installment of RM 65.00 is due on 24 November. Funds are reserved in your Runway balance to prevent RM 10 late fees.
+        </p>
+        <button class="btn-wf btn-wf-primary" id="btn-modal-close">Acknowledge</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

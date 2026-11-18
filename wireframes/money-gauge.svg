@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 620" width="320" height="620" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif">
+  <!-- Device Frame -->
+  <rect x="5" y="5" width="310" height="610" rx="30" fill="#ffffff" stroke="#2b2b2b" stroke-width="3"/>
+  <rect x="110" y="12" width="100" height="16" rx="8" fill="#e0e0e0"/>
+  
+  <!-- Screen Header -->
+  <text x="160" y="52" font-size="16" font-weight="bold" text-anchor="middle" fill="#111111">Money Gauge Page</text>
+  <line x1="20" y1="65" x2="300" y2="65" stroke="#cccccc" stroke-width="1"/>
+
+  <!-- Reminder Box -->
+  <rect x="25" y="75" width="270" height="40" rx="6" fill="#f8f9fa" stroke="#333333" stroke-width="1.5" stroke-dasharray="4 2"/>
+  <text x="160" y="99" font-size="13" font-weight="500" text-anchor="middle" fill="#333333">⚠️ Reminder: SPayLater due in 3 days</text>
+
+  <!-- Money Gauge (Half Circle) -->
+  <g transform="translate(160, 235)">
+    <!-- Dial Track -->
+    <path d="M -100 0 A 100 100 0 0 1 100 0" fill="none" stroke="#e0e0e0" stroke-width="22" stroke-linecap="round"/>
+    <!-- Dial Value (Safe buffer) -->
+    <path d="M -100 0 A 100 100 0 0 1 35 -93" fill="none" stroke="#555555" stroke-width="22" stroke-linecap="round"/>
+    <!-- Dial Center / Pointer -->
+    <circle cx="0" cy="0" r="10" fill="#111111"/>
+    <line x1="0" y1="0" x2="25" y2="-65" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+    <text x="0" y="-20" font-size="11" text-anchor="middle" fill="#666666">Gauge Status: Safe Buffer</text>
+  </g>
+
+  <!-- Money Left vs Money Spent Indicators -->
+  <g transform="translate(25, 255)">
+    <rect x="0" y="0" width="125" height="50" rx="6" fill="#f4f4f4" stroke="#333333" stroke-width="1.5"/>
+    <text x="62" y="22" font-size="11" text-anchor="middle" fill="#666666">Money Left</text>
+    <text x="62" y="40" font-size="15" font-weight="bold" text-anchor="middle" fill="#111111">RM 450.00</text>
+
+    <rect x="145" y="0" width="125" height="50" rx="6" fill="#f4f4f4" stroke="#333333" stroke-width="1.5"/>
+    <text x="207" y="22" font-size="11" text-anchor="middle" fill="#666666">Money Spent</text>
+    <text x="207" y="40" font-size="15" font-weight="bold" text-anchor="middle" fill="#111111">RM 750.00</text>
+  </g>
+
+  <!-- Spending Categories -->
+  <g transform="translate(25, 320)">
+    <rect x="0" y="0" width="270" height="135" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+    <text x="15" y="24" font-size="13" font-weight="bold" fill="#111111">Spending Categories</text>
+    
+    <text x="15" y="48" font-size="11" fill="#444444">Food &amp; Groceries</text>
+    <text x="255" y="48" font-size="11" text-anchor="end" fill="#111111">RM 420 (56%)</text>
+    <rect x="15" y="54" width="240" height="8" rx="4" fill="#e0e0e0"/>
+    <rect x="15" y="54" width="134" height="8" rx="4" fill="#444444"/>
+
+    <text x="15" y="80" font-size="11" fill="#444444">Transport &amp; Petrol</text>
+    <text x="255" y="80" font-size="11" text-anchor="end" fill="#111111">RM 180 (24%)</text>
+    <rect x="15" y="86" width="240" height="8" rx="4" fill="#e0e0e0"/>
+    <rect x="15" y="86" width="57" height="8" rx="4" fill="#666666"/>
+
+    <text x="15" y="112" font-size="11" fill="#444444">Academic &amp; Books</text>
+    <text x="255" y="112" font-size="11" text-anchor="end" fill="#111111">RM 150 (20%)</text>
+    <rect x="15" y="118" width="240" height="8" rx="4" fill="#e0e0e0"/>
+    <rect x="15" y="118" width="48" height="8" rx="4" fill="#888888"/>
+  </g>
+
+  <!-- Spending Goal -->
+  <g transform="translate(25, 470)">
+    <rect x="0" y="0" width="270" height="65" rx="6" fill="#f8f9fa" stroke="#333333" stroke-width="1.5"/>
+    <text x="15" y="24" font-size="13" font-weight="bold" fill="#111111">Spending Goal</text>
+    <text x="255" y="24" font-size="11" text-anchor="end" fill="#555555">Target: &lt; RM 1,200</text>
+    <rect x="15" y="36" width="240" height="10" rx="5" fill="#e0e0e0"/>
+    <rect x="15" y="36" width="160" height="10" rx="5" fill="#333333"/>
+    <text x="15" y="58" font-size="10" fill="#666666">Remaining cap for month: RM 450</text>
+  </g>
+
+  <!-- Navigation Bar -->
+  <g transform="translate(5, 550)">
+    <rect x="0" y="0" width="310" height="55" rx="0" fill="#ffffff" stroke="#2b2b2b" stroke-width="2"/>
+    <text x="38" y="28" font-size="10" font-weight="bold" text-anchor="middle" fill="#111111">[Gauge]</text>
+    <text x="100" y="28" font-size="10" text-anchor="middle" fill="#777777">Tracker</text>
+    <text x="165" y="28" font-size="10" text-anchor="middle" fill="#777777">BNPL</text>
+    <text x="230" y="28" font-size="10" text-anchor="middle" fill="#777777">Events</text>
+    <text x="285" y="28" font-size="9" text-anchor="middle" fill="#777777">Widget</text>
+  </g>
+</svg>
